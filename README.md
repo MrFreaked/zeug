@@ -1,6 +1,7 @@
 # zeug
 
-Einfacher Ernährungstracker mit grafischer Oberfläche.
+Einfacher Ernährungstracker mit grafischer Oberfläche. Alle Funktionen befinden
+sich in der Datei `main.py`.
 
 ## Nutzung
 

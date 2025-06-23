@@ -1,10 +1,33 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-from nutrients import Nutrients
-from food_api import get_nutrients, LOCAL_FOOD_DB
+
+@dataclass
+class Nutrients:
+    """Simple container for nutrient values per 100 g."""
+    kcal: float
+    protein: float
+    fat: float
+    carbs: float
+    fiber: float = 0.0
+    vitamin_c: float = 0.0
+    iron: float = 0.0
+
+
+# Example local data used when an external API is unavailable. In a real
+# application this would be replaced by an HTTP request.
+LOCAL_FOOD_DB = {
+    "banana": Nutrients(kcal=89, protein=1.1, fat=0.3, carbs=23, fiber=2.6, vitamin_c=8.7, iron=0.3),
+    "oats": Nutrients(kcal=389, protein=16.9, fat=6.9, carbs=66.3, fiber=10.6, iron=4.7),
+    "milk": Nutrients(kcal=42, protein=3.4, fat=1.0, carbs=5.0),
+}
+
+
+def get_nutrients(food_name: str) -> Optional[Nutrients]:
+    """Look up nutrient data from the local database."""
+    return LOCAL_FOOD_DB.get(food_name.lower())
 
 
 @dataclass
